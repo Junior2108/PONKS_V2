@@ -1,0 +1,19 @@
+{
+  "name": "ponks_v2",
+  "version": "1.0.0",
+  "homepage": "https://<USERNAME>.github.io/<REPO>",
+  "description": "Site statique PONKS V2",
+  "private": true,
+  "scripts": {
+    "start": "live-server --open=index.html --port=3000",
+    "build": "rimraf dist && mkdir -p dist && cpx \"index.html\" dist && cpx \"cv_bio.html\" dist || true && cpx \"works.html\" dist || true && cpx \"public_art.html\" dist || true && cpx \"template_carousel.html\" dist || true && cpx \"css/**\" dist/css && cpx \"js/**\" dist/js && cpx \"img/**\" dist/img",
+    "preview": "npx http-server dist -p 8080",
+    "deploy:gh-pages": "npm run build && gh-pages -d dist"
+  },
+  "devDependencies": {
+    "cpx": "^1.2.1",
+    "gh-pages": "^5.0.0",
+    "live-server": "^1.2.0",
+    "rimraf": "^5.0.0"
+  }
+}
