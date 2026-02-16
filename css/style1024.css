@@ -1,0 +1,180 @@
+@media screen and (min-width: 1024px) {
+
+
+    nav {
+        display: inline-block;
+        height: auto;
+        width: auto;
+        margin: 3rem 0 3.5rem 10%;
+}
+    
+    nav ul {
+        display: block;
+        /* margin: 40px 0 0 80px; */
+}
+
+nav li {
+    margin-bottom: .1rem;
+}
+
+    nav li a.active::after,
+    nav li a:hover::after {
+        content: "";
+        width: 30%;
+        height: 2px;
+        position: absolute;
+        bottom: -4px;
+        left: 20px;
+    }
+
+    /* ===============================================================  SECTION HEAD  ===================================================================== */
+.home_page_head{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8rem;
+}
+
+.text_head_index{
+/* width: 33%; */
+margin: 180px 0 0 30%;
+order: 1;
+}
+
+.image_head_index {
+    width: 50%;
+    margin-left: 140px;
+    order: 2;
+}
+
+.image_head_index img {
+    width: 100%;
+}
+
+/* ===============================================================  SECTION GALLERY   ===================================================================== */
+
+.gallery {
+    grid-template-columns: repeat(auto-fit, 32%);
+}
+
+.gallery_block{
+    margin-bottom: 2rem;
+}
+
+.gallery_block .gallery_img:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.gallery_block_title {
+    font-size: 1.7rem;
+}
+
+.hero_film_txt {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+    padding-left: 2rem;
+}
+
+
+/* ===============================================================  SECTION FOOTER  ===================================================================== */
+
+.footer-info p,
+.footer-info a {
+    font-size: 1.2rem;
+}
+
+.footer-info p+p::before {
+    content: "|";
+    padding: 1.2rem
+}
+
+.footer-info {
+  margin: 0 3rem 0 2rem;
+}   
+
+/* ===============================================================  TEMPLATE CAROUSEL  ===================================================================== */
+
+.hero_work {
+    width: 100%;
+    display: flex;
+    /* margin: 75px 0 200px 80px; */
+}
+/* .hero_work_image,
+.hero_work_image img {
+    width: 800px;
+    height: 800px;
+    object-fit: cover;
+} */
+
+/* .hero_work_image {
+     margin:  0 50px; 
+} */
+
+.hero_work_text {
+    margin:0 10rem 0 3rem;
+}
+
+.hero_work_gallery{
+    margin: 0  0 0 10rem;
+
+}
+
+.hero_work_text h2 {
+    font-size: 1.5rem;
+}
+
+.hero_work_text h3 {
+    font-size: 1rem;
+}
+
+.hero_work_text p{
+    font-size: 0.9rem;
+}
+
+.hero_public_art {
+    /* display: flex; */
+    width: 1024px;
+    grid-template-columns: repeat(auto-fit, 450px);
+    justify-content: center;
+    margin-bottom: 9rem;
+    /* gap: 70px; */
+    /* margin: 100px 0;  */
+}
+
+.hero_public_art_txt {
+	padding: 0 10%;
+	margin: 2rem 0 5rem;
+}
+  
+
+
+/* 
+.hero_work_text h3:last-of-type {
+    margin-bottom: 50px;
+}
+
+
+
+
+
+
+
+
+.thumbnail {
+    width: 100px;
+    height: 100px;
+}
+
+.hero_work_thumb_image{
+    display: flex;
+    flex-direction: column;
+}
+
+.hero_work_thumb_image img {
+    cursor: pointer;
+} */
+
+}

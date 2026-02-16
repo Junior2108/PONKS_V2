@@ -1,0 +1,120 @@
+@media screen and (min-width: 768px) {
+
+
+/* ===============================================================  SECTION GALLERY   ===================================================================== */
+
+/* nav {
+	display: inline-block;
+	height: auto;
+	width: auto;
+	margin: 3rem 0 3.5rem 10%;
+} */
+
+.selected_works{
+display: none;
+}
+
+.gallery {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(auto-fit, 48%);
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+
+
+
+.gallery_img {
+    transition: opacity 0.3 ease;
+}
+
+.gallery_block .gallery_img:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.gallery_block {
+	margin-bottom: 0;
+}
+
+
+/* ===============================================================  SECTION FILM HOME PAGE   ===================================================================== */
+
+.hero_film_frame {
+	width: 75%;
+    aspect-ratio: 16/9;
+}
+
+
+.hero_film_title {
+    justify-content: left;
+}
+
+
+.hero_film {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.hero_film_txt h2:last-of-type{
+    margin-bottom: 1rem;
+}
+/* ===============================================================  SECTION FOOTER  ===================================================================== */
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 1rem; */
+}
+
+.footer-info {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 0 0 0 0;
+}   
+
+.footer-info p,
+.footer-info a {
+    font-size: 1.2rem;
+}
+
+/* ===============================================================  TEMPLATE CAROUSEL  ===================================================================== */
+
+.hero_work_gallery {
+	display: flex;
+	margin-bottom: 2rem;
+	justify-content: center;
+	align-items: center;
+}
+
+.hero_work_thumb_image {
+display: block;
+margin: 0;
+}
+
+.hero_work_image, 
+.hero_work_image img {
+	width: 504.9px;
+	height: 504.9px;
+}
+
+.thumbnail,
+.thumbnail_block {
+    width: 63.1px;
+    height: 63.1px;
+}
+
+.hero_work{
+    margin-bottom: 9rem;
+}
+.hero_work_text {
+	margin: 0 10rem;
+}
+      
+}
+
+
