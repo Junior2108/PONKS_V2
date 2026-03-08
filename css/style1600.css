@@ -1,15 +1,6 @@
 @media screen and (min-width: 1600px) {
 
 
-
-.container {
-    width: 1600px;
-}
-
-.logo {
-	width: 1600px;
-}
-
 .logo img {
 	margin: -9% 0 0 0%;
 }
@@ -19,59 +10,6 @@
 }
 nav li a {
 	font-size: 1.3rem;
-}
-
-.text_head_index h2 {
-	font-size: 1.6rem;
-}
-
-.text_head_index p {
-	font-size: 1.4rem;
-}
-
-.hero_work_gallery {
-	margin: 0 0 0 25rem;
-}
-
-.hero_work_text {
-	margin: 0 23rem 0 3rem;
-}
-
-.hero_work_text p {
-	font-size: 1.2rem;
-}
-
-.gallery {
-	grid-template-columns: 500px repeat(auto-fill, 500px);
-}
-
-.gallery_block {
-	width: 500px;
-	margin-bottom: 1.33rem;
-}
-
-.gallery_block_title {
-	width: 500px;
-	font-size: 1.7rem;
-}
-
-.hero_film {
-	height: 650px;
-	align-items: center;
-    margin: 0;
-	/* justify-content: center; */
-}
-
-.hero_public_art {
-	width: 1600px;
-}
-
-.hero_film_frame {
-	height: 520px;
-	margin: 0 0 0 10%;
-}
-.hero_public_art_txt {
-	margin: 0 15% 0 2rem;
 }
 
 .cv_bio p {

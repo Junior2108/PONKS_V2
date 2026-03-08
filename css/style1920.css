@@ -1,15 +1,5 @@
 @media screen and (min-width: 1920px) {
 
-
-
-.container {
-    width: 1920px;
-}
-
-.logo {
-	width: 1920px;
-}
-
 nav li a {
 	font-size: 1.4rem;
 }
@@ -22,45 +12,12 @@ nav li a {
 	font-size: 1.4rem;
 }
 
-.gallery {
-    grid-template-columns: repeat(auto-fill, 600px);
+.hero_work {
+	width: 60%;
+	margin: 0 20% 4rem 20%;
 }
 
-.gallery_block{
-    width: 600px;
-}
-
-.gallery_block_title {
-    width: 600px;
-}
-
-.hero_film {
-	height: 800px;
-}
-
-.hero_film_frame {
-	height: 570px;
-	margin: 0 0 0 2%;
-}
-
-.hero_work_text {
-    margin:0 40rem 0 3rem;
-}
-
-.hero_work_gallery{
-    margin: 0  0 0 40rem;
-
-}
-
-.hero_work_text p{
-    /* font-size: 1.1rem; */
-}
-
-.hero_film_txt {
-	margin-top: 35rem;
-}
-
-.hero_film_txt p {
+/* .hero_film_txt p {
 	font-size: 1.8em;
 	font-weight: 500;
 }
@@ -69,7 +26,7 @@ nav li a {
 	font-size: 3.5rem;
 	font-weight: 600;
 	line-height: 0.8;
-}
+} */
 
 
 

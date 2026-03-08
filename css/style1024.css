@@ -10,14 +10,13 @@
     
     nav ul {
         display: block;
-        /* margin: 40px 0 0 80px; */
 }
 
 nav li {
     margin-bottom: .1rem;
 }
 
-    nav li a.active::after,
+    /* nav li a.active::after,
     nav li a:hover::after {
         content: "";
         width: 30%;
@@ -25,7 +24,7 @@ nav li {
         position: absolute;
         bottom: -4px;
         left: 20px;
-    }
+    } */
 
     /* ===============================================================  SECTION HEAD  ===================================================================== */
 .home_page_head{
@@ -37,7 +36,6 @@ nav li {
 }
 
 .text_head_index{
-/* width: 33%; */
 margin: 180px 0 0 30%;
 order: 1;
 }
@@ -58,12 +56,8 @@ order: 1;
     grid-template-columns: repeat(auto-fit, 32%);
 }
 
-.gallery_block{
-    margin-bottom: 2rem;
-}
-
-.gallery_block .gallery_img:hover {
-    opacity: 0.8;
+.gallery_img{
+    position: relative;
     cursor: pointer;
 }
 
@@ -71,12 +65,32 @@ order: 1;
     font-size: 1.7rem;
 }
 
+.gallery_img .pink-filter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    background-color: rgba(255, 192, 203, 0); 
+    pointer-events: none;
+    transition: background-color .2s ease-in-out;
+}
+
+.gallery_img:hover .pink-filter {
+    background-color: rgba(255, 192, 203, .3);
+}
+
+.hero_film_title {
+width: 12%;}
+
+/* 
 .hero_film_txt {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
     padding-left: 2rem;
-}
+} */
 
 
 /* ===============================================================  SECTION FOOTER  ===================================================================== */
@@ -96,31 +110,72 @@ order: 1;
 }   
 
 /* ===============================================================  TEMPLATE CAROUSEL  ===================================================================== */
-
+ 
 .hero_work {
-    width: 100%;
-    display: flex;
-    /* margin: 75px 0 200px 80px; */
+    /* display: flex; */
+    width: 80%;
+    margin: 0 10%;
 }
-/* .hero_work_image,
-.hero_work_image img {
-    width: 800px;
-    height: 800px;
-    object-fit: cover;
-} */
-
-/* .hero_work_image {
-     margin:  0 50px; 
-} */
 
 .hero_work_text {
-    margin:0 10rem 0 3rem;
+    margin:0;
+    padding-bottom: 5rem;
 }
+
+.hero_work_thumb_image {
+display: inline-block;
+width: 12.5%;
+height: auto;
+margin: 0;
+aspect-ratio: 1/1;
+gap: 0;
+}
+
+.thumbnail_block {
+	width: 100%;
+	height: 12.5%;
+}
+
+
 
 .hero_work_gallery{
-    margin: 0  0 0 10rem;
-
+    display: flex;
 }
+
+.hero_public_art {
+	display: flex;
+    margin: 0 10%;
+    width: 80%;
+	justify-content: center;
+    margin-bottom: 8rem;
+}
+
+.hero_film {
+    margin: 0 10%;
+    width: 80%;
+	flex-direction: row;
+}
+
+.hero_film_frame {
+	width: 100%;
+    margin: 0;
+}
+
+.hero_public_art_txt {
+    width: 25%;
+	margin: 0 0 0 4rem;
+}
+
+.hero_film_txt {
+    width: 100%;
+	margin: 4rem 0 4rem 0;
+}
+
+
+/*
+
+
+
 
 .hero_work_text h2 {
     font-size: 1.5rem;
@@ -135,20 +190,47 @@ order: 1;
 }
 
 .hero_public_art {
-    /* display: flex; */
-    width: 1024px;
-    grid-template-columns: repeat(auto-fit, 450px);
-    justify-content: center;
-    margin-bottom: 9rem;
-    /* gap: 70px; */
-    /* margin: 100px 0;  */
+	display: flex;
+	justify-content: center;
+    align-items: center;
+    padding: 0 10%;
+    margin-bottom: 8rem;
 }
 
+
+
 .hero_public_art_txt {
-	padding: 0 10%;
-	margin: 2rem 0 5rem;
+	width: 45%;
+	padding: 0 0 0 2rem;
 }
-  
+
+.hero_public_art_txt h3:last-of-type {
+	margin-bottom: 1rem;
+}
+
+.hero_public_art_txt p {
+	margin-bottom: 1rem;
+}
+
+ */
+
+
+
+
+/* .hero_work_image,
+.hero_work_image img {
+    width: 800px;
+    height: 800px;
+    object-fit: cover;
+} */
+
+/* .hero_work_image {
+     margin:  0 50px; 
+} */
+
+/* .hero_work_text {
+	margin: 0 10rem;
+} */
 
 
 /* 
