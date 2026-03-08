@@ -1,75 +1,37 @@
 @media screen and (min-width: 1200px) {
 
-
-
-.container {
-    width: 1200px;
-}
-
-.logo {
-	width: 1200px;
-}
-
 nav {
 	margin-bottom: 5rem;
 }
 
-.gallery {
-    grid-template-columns: 375px repeat(auto-fill, 375px);
-}
+ .hero_work {
+    display: flex;
+	 justify-content: space-between;
+} 
 
-.gallery_block{
-    width: 375px;
-}
 
-.gallery_block .gallery_img:hover {
-    opacity: 0.8;
-}
-
-.gallery_block_title {
-    width: 375px;
-}
-
-.hero_film {
-	/* width: 1200px; */
-	height: 550px;
-	align-items: center;
-	justify-content: center;
-}
-
-.hero_film_txt {
-    display: block;
-	width: 100%;
-	padding: 1rem 0 0rem 3rem;
-	/* margin-top: 20rem; */
-    margin-left: 0;
-}
-
-.hero_film_frame {
-	width: 100%;
-	margin: 0 0 0 10%;
-	height: 365px;
+.hero_work_gallery {
+	width: 65%;
+	height: 65%;
+	/* justify-content: center;
+	margin-bottom: 0; */
 }
 
 .hero_work_text {
-	margin: 0 15rem 0 3rem;
-}
-
-.hero_work_gallery {
-	margin: 0 0 0 15rem;
-}
-
-.hero_public_art {
-    display: flex;
-    width: 1200px;
-    justify-content: center;
-    /* gap: 70px; */
-    /* margin: 100px 0;  */
-}
-
-.hero_public_art_txt {
+	width: 33%;
 	padding: 0;
-	margin: 0 10% 0 2rem;
+}
+
+.hero_film {
+	display: flex;
+	margin: 0 5%;
+	width: 90%;
+	justify-content: space-between;
+}
+
+.hero_film_txt {
+	width: 50%;
+	margin: 0 0 0 4rem;
 }
 
 }

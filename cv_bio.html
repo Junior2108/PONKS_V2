@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="css/style375.css">
     <link rel="stylesheet" href="css/style425.css">
     <link rel="stylesheet" href="css/style720.css">
     <link rel="stylesheet" href="css/style768.css">
     <link rel="stylesheet" href="css/style1024.css">
-    <!-- <link rel="stylesheet" href="css/style1200.css">
+    <link rel="stylesheet" href="css/style1200.css">
     <link rel="stylesheet" href="css/style1440.css">
     <link rel="stylesheet" href="css/style1600.css">
     <link rel="stylesheet" href="css/style1920.css">
-    <link rel="stylesheet" href="css/style4k.css"> -->
+    <link rel="stylesheet" href="css/style4k.css">
     <title>PONKS</title>
-</head>
+</head> 
 <body>
  
     <div class="container">
@@ -28,10 +30,10 @@
 
         <nav>
             <ul>
-                <li><a href="works.html">works</a></li>
-                <li><a href="public_art.html">public art</a></li>
-                <li><a href="films.html">films</a></li>
-                <li><a href="cv_bio.html">cv/bio</a></li>
+                <li><a class="nav-link" href="works.html">works</a></li>
+                <li><a class="nav-link" href="public_art.html">public art</a></li>
+                <li><a class="nav-link" href="films.html">films</a></li>
+                <li><a class="nav-link active" href="cv_bio.html">cv/bio</a></li>
             </ul>
         </nav>
 
@@ -40,7 +42,7 @@
         <p>PONKS is an art collective created by Julien Vinet (visual art, installation, b. France) and Sam Alekksandra (poetry, visual art, b. Malta). This collective lies at a morphing intersection of poetry, visual arts, installation, performance, video and sound, that is born and based in Malta. The duo aims to engage in public spaces to inspire critical discourse and self constructive practices, while using conceptually-driven initiatives that subvert a sense of order.Following their debut international show in Shanghai, 边 EDGE /// 上 OVER /// 看 LOOKING (July 2024) the collective embarked on the trans-Mediterranean project RITUAL, with the first edition held at JAOU, Tunis Biennale in November 2024.</p>
 
 
-        <p class="downlaod_link"><a href="">Downlaod Portfolio</a></p>
+        <p class="downlaod_link"><a href="/ressources/Master_Portofolio_Ponks.pdf" target="_blank">Downlaod Portfolio</a></p>
 
          <p class="p_title">PONKS Manifesto</p>
         
@@ -103,6 +105,16 @@ July 2024 (CHN) - Solo show</p>
     <p>ponkscollective@gmail.com</p>
     <p>IG: @ponks_collective</p>
 </div>
+
+<div class="newsletter">
+    <form action="submit_form.php" method="post">
+        <label for="email">Newsletter Email:</label>
+        <input type="email" name="email" id="email" placeholder="Enter your email address" required>
+        
+        <button type="submit">Subscribe</button>
+    </form>
+</div>
+
 <p><span class="copyright">&copy;</span>2025 PONKS | All rights reserved</p>
 
         </section>
@@ -113,13 +125,14 @@ July 2024 (CHN) - Solo show</p>
             </div>
             <div class="footer-info">
                 <p>PONKS Studio</p>
-                <p>51 Triq Il-Lunzjata, Tas Sliema, Malta</p>
-                <p><a href="">ponkscollective@gmail.com</a></p>
-                <p>Instagram</p>
-                <p>Newsletter</p>
-                <p>Privacy Policy</p>
+                <p><a href="https://maps.app.goo.gl/jvAspLax1i7ZZfqr5" target="_blank">88 Triq ir-Rinella, Kalkara, Malta</a></p>
+                <p><a href="mailto:ponkscollective@gmail.com">ponkscollective@gmail.com</a></p>
+                <p><a href="https://www.instagram.com/ponks_collective/" target="_blank">Instagram</a></p>
+                <p><a href="#email">Newsletter</a></p>
+                <p><a href="privacy_policy.html">Privacy Policy</a></p>
             </div>
         </footer>
     </div>
 </body>
+<script src="js/index.js"></script>
 </html>

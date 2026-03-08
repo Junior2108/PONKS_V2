@@ -28,34 +28,11 @@ display: none;
     transition: opacity 0.3 ease;
 }
 
-.gallery_block .gallery_img:hover {
-    opacity: 0.8;
-    cursor: pointer;
-}
-
-.gallery_block {
-	margin-bottom: 0;
-}
-
-
 /* ===============================================================  SECTION FILM HOME PAGE   ===================================================================== */
 
-.hero_film_frame {
-	width: 75%;
-    aspect-ratio: 16/9;
-}
-
-
 .hero_film_title {
-    justify-content: left;
-}
-
-
-.hero_film {
-    display: flex;
-    margin: 0 auto;
-    justify-content: center;
-    padding: 2rem 1rem;
+    justify-content: right;
+    padding-right: 1rem;
 }
 
 .hero_film_txt h2:last-of-type{
@@ -82,37 +59,42 @@ display: none;
     font-size: 1.2rem;
 }
 
+
+.newsletter label {
+    display: inline-block;
+    margin-right: 4rem;
+}
+
 /* ===============================================================  TEMPLATE CAROUSEL  ===================================================================== */
 
-.hero_work_gallery {
-	display: flex;
-	margin-bottom: 2rem;
-	justify-content: center;
-	align-items: center;
+
+
+
+.hero_public_art {
+	width: 80%;
+	margin: 0 10%;
 }
 
-.hero_work_thumb_image {
-display: block;
-margin: 0;
+.hero_windmade_rgb {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin: 0 10% 5rem;
 }
 
-.hero_work_image, 
-.hero_work_image img {
-	width: 504.9px;
-	height: 504.9px;
+.hero_film_windmade_rgb {
+    width: 100%;
+    margin: 0;
 }
 
-.thumbnail,
-.thumbnail_block {
-    width: 63.1px;
-    height: 63.1px;
+.hero_public_art_txt {
+width: 80%;
+	margin: 4rem 10%;
 }
 
-.hero_work{
-    margin-bottom: 9rem;
-}
-.hero_work_text {
-	margin: 0 10rem;
+.hero_windmade_rgb_txt {
+    width: 100%;
+    margin: 0 0 0 4rem;
 }
       
 }

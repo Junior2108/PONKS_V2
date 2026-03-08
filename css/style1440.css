@@ -1,19 +1,6 @@
 @media screen and (min-width: 1440px) {
 
 
-
-.container {
-    width: 1440px;
-}
-
-.logo {
-	width: 1440px;
-}
-
-.text_head_index{
-/* margin: 0 0 0 80px; */
-}
-
 nav li a {
 	font-size: 1.2rem;
 }
@@ -26,66 +13,4 @@ nav li a {
     font-size: 1.4rem;
 }
 
-.gallery {
-    grid-template-columns: 450px repeat(auto-fill, 450px);
-}
-
-.gallery_block{
-    width: 450px;
-    margin-bottom: 2rem;
-}
-
-.gallery_block .gallery_img:hover {
-    opacity: 0.8;
-    cursor: pointer;
-}
-
-.gallery_block_title {
-    width: 450px;
-    font-size: 1.7rem;
-}
-
-.hero_film {
-	height: 620px;
-	align-items: center;
-	justify-content: center;
-}
-
-.hero_film_txt {
-	width: 100%;
-	padding: 1rem 0 0rem 5rem;
-}
-
-.hero_work_text {
-    margin:0 15rem 0 3rem;
-}
-
-.hero_work_image, 
-.hero_work_image img {
-	width: 755.6px;
-	height: 755.6px;
-}
-
-.thumbnail,
-.thumbnail_block {
-    width: 94.4px;
-    height: 94.4px;
-}
-
-.hero_work_text h2 {
-    font-size: 1.7rem;
-}
-
-.hero_work_text h3 {
-    font-size: 1rem;
-}
-
-.hero_work_text p{
-    font-size: 1.2rem;
-}
-
-.hero_film_frame {
-	margin: 0 0 0 2.5rem;
-	height: 450px;
-}
 }
