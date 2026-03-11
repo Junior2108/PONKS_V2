@@ -40,6 +40,11 @@ a {
     cursor: pointer;
 }
 
+a.disable_link {
+    pointer-events: none;
+    cursor: default;
+}
+
 h1 {
     font-size: var(--h1-height);
     line-height: 64px;
