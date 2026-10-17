@@ -33,3 +33,6 @@ $pageTitle = $pageTitle ?? 'Administration';
         <?php endif; ?>
     </header>
     <main class="admin-main">
+        <?php if ($flashMessage = take_flash()): ?>
+            <p class="admin-success"><?= e($flashMessage) ?></p>
+        <?php endif; ?>
