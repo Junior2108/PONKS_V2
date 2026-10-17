@@ -76,3 +76,25 @@ function csrf_check(): void
         exit('Formulaire expiré ou invalide. Recharge la page et réessaie.');
     }
 }
+
+// ---------------------------------------------------------------------
+// Messages "flash" : affichés UNE seule fois, sur la page suivante
+// ---------------------------------------------------------------------
+// Après un enregistrement, on redirige vers une autre page : le message
+// "Œuvre enregistrée" doit donc survivre à la redirection. On le range
+// en session, et on l'efface dès qu'il a été lu.
+
+function flash(string $message): void
+{
+    start_session();
+    $_SESSION['flash'] = $message;
+}
+
+function take_flash(): ?string
+{
+    start_session();
+    $message = $_SESSION['flash'] ?? null;
+    unset($_SESSION['flash']);
+
+    return $message;
+}

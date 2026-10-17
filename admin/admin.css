@@ -197,3 +197,43 @@ button {
     border-radius: 8px;
     color: #71717a;
 }
+
+/* --- Formulaire d'édition --- */
+
+.admin-success {
+    padding: 10px;
+    border-radius: 6px;
+    background: #dcfce7;
+    color: #166534;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));   /* 3 colonnes, ou moins sur petit écran */
+    gap: 12px;
+}
+
+.form-row > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.field-hint {
+    margin: 0;
+    font-size: 13px;
+    color: #71717a;
+}
+
+.field-error {
+    margin: 0;
+    font-size: 14px;
+    color: #b91c1c;
+}
+
+.admin-form label.checkbox {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-weight: 400;
+}
