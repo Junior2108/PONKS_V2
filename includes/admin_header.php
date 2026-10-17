@@ -23,6 +23,11 @@ $pageTitle = $pageTitle ?? 'Administration';
         <a class="admin-logo" href="index.php">PONKS admin</a>
 
         <?php if (!empty($_SESSION['user_id'])): ?>
+            <nav class="admin-nav">
+                <a href="index.php">Œuvres</a>
+                <a href="pages.php">Pages</a>
+                <a href="../index.html" target="_blank">Voir le site</a>
+            </nav>
             <!-- La déconnexion est un formulaire POST (et pas un simple lien) :
                  un site pirate ne peut donc pas te déconnecter avec une image <img src="logout.php"> -->
             <form method="post" action="logout.php" class="admin-logout">

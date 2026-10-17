@@ -277,3 +277,71 @@ button {
 .button-danger {
     background: #b91c1c;
 }
+
+.image-move {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+button:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+/* --- Zone de suppression --- */
+
+.admin-danger-zone {
+    margin-top: 48px;
+    padding: 24px;
+    border: 2px solid #fecaca;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.admin-danger-zone h2 {
+    margin-top: 0;
+    color: #b91c1c;
+}
+
+/* --- Menu de l'admin --- */
+
+.admin-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.admin-nav a {
+    color: #fff;
+}
+
+/* Badges de rubrique (ceux qui n'ont pas de couleur de statut) */
+.badge:not(.badge-published):not(.badge-draft) {
+    background: #fce7f3;
+    color: #9d174d;
+}
+
+/* --- Cases "Où afficher l'œuvre ?" --- */
+
+.admin-flags {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 16px 0 0;
+    padding: 12px 16px;
+    border: 1px solid #d4d4d8;
+    border-radius: 6px;
+}
+
+.admin-flags legend {
+    padding: 0 4px;
+    font-weight: 600;
+}
+
+/* --- Éditeur de HTML des pages --- */
+
+textarea.code {
+    font-family: ui-monospace, monospace;
+    font-size: 13px;
+}

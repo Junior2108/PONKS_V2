@@ -1,7 +1,7 @@
 <?php
 // =====================================================================
 // Tableau de bord : liste de toutes les œuvres (brouillons compris)
-// Filtre facultatif par rubrique : index.php?category=films
+// Filtre facultatif par rubrique : index.php?filter=films
 // =====================================================================
 
 require __DIR__ . '/../includes/db.php';
@@ -11,21 +11,23 @@ require __DIR__ . '/../includes/auth.php';
 // Première ligne de CHAQUE page protégée : sans connexion, on est renvoyé vers login.php
 require_login();
 
-// Les rubriques possibles (les mêmes que l'ENUM de la colonne works.category)
-$categories = [
-    'works'      => 'Works',
-    'public_art' => 'Public art',
-    'films'      => 'Films',
+// Les filtres possibles : clé dans l'URL => [colonne en base, texte affiché]
+// LISTE BLANCHE : un nom de colonne ne peut pas être passé avec "?" dans
+// une requête préparée. On ne met donc dans le SQL que des noms de ce tableau.
+$filters = [
+    'public_art' => ['in_public_art', 'Public art'],
+    'films'      => ['in_films', 'Films'],
+    'home'       => ['on_home', 'Accueil'],
+    'drafts'     => ['NOT published', 'Brouillons'],
 ];
 
 // ---------------------------------------------------------------------
 // 1. Lire et VALIDER le filtre
 // ---------------------------------------------------------------------
-// LISTE BLANCHE : on n'accepte que les valeurs qu'on connaît.
-// Tout le reste (faute de frappe, tentative de piratage...) = pas de filtre.
-$category = $_GET['category'] ?? '';
-if (!array_key_exists($category, $categories)) {
-    $category = '';
+// Tout ce qui n'est pas dans la liste (faute de frappe, tentative de piratage...) = pas de filtre.
+$filter = $_GET['filter'] ?? '';
+if (!array_key_exists($filter, $filters)) {
+    $filter = '';
 }
 
 // ---------------------------------------------------------------------
@@ -34,35 +36,31 @@ if (!array_key_exists($category, $categories)) {
 // La SOUS-REQUÊTE entre parenthèses est exécutée pour chaque œuvre :
 // elle compte les lignes de work_images qui lui appartiennent.
 // "AS image_count" donne un nom à ce résultat calculé.
-$sql = 'SELECT id, slug, title, category, year, published,
+$sql = 'SELECT id, slug, title, year, published, in_public_art, in_films, on_home, home_hero,
                (SELECT COUNT(*) FROM work_images WHERE work_images.work_id = works.id) AS image_count
         FROM works';
-$params = [];
 
-if ($category !== '') {
-    $sql .= ' WHERE category = ?';   // .= ajoute du texte à la fin de la chaîne
-    $params[] = $category;           // [] = ajoute un élément à la fin du tableau
+if ($filter !== '') {
+    $sql .= ' WHERE ' . $filters[$filter][0];   // texte venant UNIQUEMENT de $filters
 }
 
-$sql .= ' ORDER BY category, position, id';
+$sql .= ' ORDER BY position, id';
 
-$stmt = db()->prepare($sql);
-$stmt->execute($params);
-$works = $stmt->fetchAll();
+$works = db()->query($sql)->fetchAll();
 
 $pageTitle = 'Œuvres';
 require __DIR__ . '/../includes/admin_header.php';
 ?>
         <div class="admin-toolbar">
             <h1>Œuvres <small>(<?= count($works) ?>)</small></h1>
-            <!-- edit.php sans id = création d'une nouvelle œuvre (étape 7) -->
+            <!-- edit.php sans id = création d'une nouvelle œuvre -->
             <a class="button" href="edit.php">+ Nouvelle œuvre</a>
         </div>
 
         <nav class="admin-filters">
-            <a href="index.php" class="<?= $category === '' ? 'active' : '' ?>">Toutes</a>
-            <?php foreach ($categories as $key => $label): ?>
-                <a href="index.php?category=<?= e($key) ?>" class="<?= $category === $key ? 'active' : '' ?>"><?= e($label) ?></a>
+            <a href="index.php" class="<?= $filter === '' ? 'active' : '' ?>">Toutes</a>
+            <?php foreach ($filters as $key => [, $label]): ?>
+                <a href="index.php?filter=<?= e($key) ?>" class="<?= $filter === $key ? 'active' : '' ?>"><?= e($label) ?></a>
             <?php endforeach; ?>
         </nav>
 
@@ -75,7 +73,7 @@ require __DIR__ . '/../includes/admin_header.php';
                     <thead>
                         <tr>
                             <th>Titre</th>
-                            <th>Rubrique</th>
+                            <th>Rubriques</th>
                             <th>Année</th>
                             <th>Images</th>
                             <th>Statut</th>
@@ -86,7 +84,12 @@ require __DIR__ . '/../includes/admin_header.php';
                         <?php foreach ($works as $work): ?>
                             <tr>
                                 <td><strong><?= e($work['title']) ?></strong></td>
-                                <td><?= e($categories[$work['category']]) ?></td>
+                                <td>
+                                    <?php if ($work['in_public_art']): ?><span class="badge">Public art</span><?php endif; ?>
+                                    <?php if ($work['in_films']): ?><span class="badge">Films</span><?php endif; ?>
+                                    <?php if ($work['on_home']): ?><span class="badge">Accueil</span><?php endif; ?>
+                                    <?php if ($work['home_hero']): ?><span class="badge badge-published">À la une</span><?php endif; ?>
+                                </td>
                                 <!-- (string) : e() attend du texte, l'année est un nombre (ou null) -->
                                 <td><?= e((string) $work['year']) ?></td>
                                 <td><?= (int) $work['image_count'] ?></td>
@@ -101,7 +104,7 @@ require __DIR__ . '/../includes/admin_header.php';
                                     <a href="edit.php?id=<?= (int) $work['id'] ?>">Modifier</a>
                                     <?php if ($work['published']): ?>
                                         <!-- target="_blank" : ouvre le site dans un nouvel onglet -->
-                                        <a href="../oeuvre.php?slug=<?= e(urlencode($work['slug'])) ?>" target="_blank">Voir</a>
+                                        <a href="../<?= e(work_url($work['slug'])) ?>" target="_blank">Voir</a>
                                     <?php endif; ?>
                                 </td>
                             </tr>

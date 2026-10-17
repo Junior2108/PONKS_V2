@@ -1,11 +1,12 @@
 <?php
 // =====================================================================
 // Page d'une œuvre, générée à partir de la base de données.
-// Adresse : oeuvre.php?slug=djerbism
+// Adresse publique : flaneur.html  (le .htaccess appelle en interne oeuvre.php?slug=flaneur)
 // =====================================================================
 
 require __DIR__ . '/includes/db.php';
 require __DIR__ . '/includes/functions.php';
+require __DIR__ . '/includes/works.php';
 
 // ---------------------------------------------------------------------
 // 1. Lire le slug dans l'URL
@@ -32,7 +33,7 @@ if (!$work) {
     http_response_code(404);
     $pageTitle = 'PONKS - Not found';
     require __DIR__ . '/includes/header.php';
-    echo '<p>This work does not exist.</p>';
+    echo '<section class="cv_bio"><p class="p_title">This page does not exist.</p><p><a href="works.html">See all works</a></p></section>';
     require __DIR__ . '/includes/footer.php';
     exit;
 }
@@ -48,28 +49,10 @@ $images = $stmt->fetchAll();
 $mainImage = $images[0]['path'] ?? $work['thumbnail'];
 
 // ---------------------------------------------------------------------
-// 5. Les autres œuvres de la même rubrique (galerie du bas)
-// ---------------------------------------------------------------------
-$stmt = db()->prepare(
-    'SELECT slug, title, thumbnail FROM works
-     WHERE published = 1 AND category = ? AND id <> ?
-     ORDER BY position, id'
-);
-$stmt->execute([$work['category'], $work['id']]);
-$otherWorks = $stmt->fetchAll();
-
-// ---------------------------------------------------------------------
-// 6. Préparer le bloc d'infos : une ligne de texte = un <p>
-// ---------------------------------------------------------------------
-// \R = n'importe quel retour à la ligne (Windows, Mac ou Linux).
-// array_filter retire les lignes vides.
-$infoLines = array_filter(array_map('trim', preg_split('/\R/', $work['info'] ?? '')));
-
-// ---------------------------------------------------------------------
-// 7. Affichage
+// 5. Affichage
 // ---------------------------------------------------------------------
 $pageTitle  = 'PONKS - ' . $work['title'];
-$activePage = $work['category'];
+$activePage = 'works';
 require __DIR__ . '/includes/header.php';
 ?>
             <div class="hero_work">
@@ -98,10 +81,16 @@ require __DIR__ . '/includes/header.php';
                     </div>
                 </div>
                 <div class="hero_work_text">
-                    <h2><?= e($work['title']) ?></h2>
+                    <h2>
+                        <?= e($work['title']) ?>
+                        <?php if ($work['subtitle']): ?>
+                            <span class="title_self"><?= e($work['subtitle']) ?></span>
+                        <?php endif; ?>
+                    </h2>
                     <div class="hero_work_info">
-                        <?php foreach ($infoLines as $line): ?>
-                            <p><?= e($line) ?></p>
+                        <?php foreach (info_lines($work['info']) as $line): ?>
+                            <!-- linkify : une adresse https://... dans les infos devient un lien -->
+                            <p><?= linkify(e($line)) ?></p>
                         <?php endforeach; ?>
                     </div>
                     <div class="hero_work_description">
@@ -111,33 +100,19 @@ require __DIR__ . '/includes/header.php';
                                 ///////////////////////////////////////////////////////////////////////////
                             </p>
                         <?php endif; ?>
-                        <?php if ($work['description']): ?>
-                            <!-- ORDRE IMPORTANT : d'abord e() pour neutraliser le HTML,
-                                 ensuite nl2br() qui transforme les retours à la ligne en <br> -->
-                            <p><?= nl2br(e($work['description'])) ?></p>
-                        <?php endif; ?>
+                        <!-- text_to_html : une ligne vide = un nouveau paragraphe,
+                             et le texte est échappé AVANT d'ajouter les balises -->
+                        <?= text_to_html($work['description']) ?>
                     </div>
+                    <?php if ($work['video_url']): ?>
+                        <?php $videoWork = $work; require __DIR__ . '/includes/video.php'; ?>
+                    <?php endif; ?>
                 </div>
             </div>
-            <section class="gallery gallery_works_page">
-                <?php foreach ($otherWorks as $other): ?>
-                    <div class="gallery_block">
-                        <!-- urlencode : rend le slug sûr à l'intérieur d'une adresse -->
-                        <a href="oeuvre.php?slug=<?= e(urlencode($other['slug'])) ?>">
-                            <div class="gallery_img">
-                                <img
-                                    height="768"
-                                    width="768"
-                                    src="<?= e($other['thumbnail']) ?>"
-                                    alt=""
-                                >
-                                <div class="pink-filter"></div>
-                            </div>
-                            <div class="gallery_block_title">
-                                <p><?= e($other['title']) ?></p>
-                            </div>
-                        </a>
-                    </div>
-                <?php endforeach; ?>
-            </section>
-<?php require __DIR__ . '/includes/footer.php'; ?>
+<?php
+// Galerie du bas : toutes les autres œuvres publiées
+$galleryWorks = published_works(null, $work['id']);
+$galleryClass = 'gallery gallery_works_page';
+require __DIR__ . '/includes/gallery.php';
+
+require __DIR__ . '/includes/footer.php';
