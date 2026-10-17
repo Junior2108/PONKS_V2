@@ -107,8 +107,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['position'] = 'La position doit être un nombre entier.';
     }
 
-    if ($work['thumbnail'] !== '' && !preg_match('#^img/\S+$#', $work['thumbnail'])) {
-        $errors['thumbnail'] = 'Le chemin doit commencer par img/ et ne pas contenir d\'espace.';
+    if ($work['thumbnail'] !== '' && !preg_match('#^(img|uploads)/\S+$#', $work['thumbnail'])) {
+        $errors['thumbnail'] = 'Le chemin doit commencer par img/ ou uploads/ et ne pas contenir d\'espace.';
     }
 
     // --- Aucune erreur : on enregistre ---
@@ -159,6 +159,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // ---------------------------------------------------------------------
 // S'il y a des erreurs, $work contient ce que l'utilisateur a tapé :
 // le formulaire est réaffiché avec ses saisies, rien n'est perdu.
+
+// Les images (uniquement pour une œuvre déjà enregistrée : il faut son id)
+$images = [];
+if ($id) {
+    $stmt = db()->prepare('SELECT id, path FROM work_images WHERE work_id = ? ORDER BY position, id');
+    $stmt->execute([$id]);
+    $images = $stmt->fetchAll();
+}
 
 $pageTitle = $id ? 'Modifier ' . $work['title'] : 'Nouvelle œuvre';
 require __DIR__ . '/../includes/admin_header.php';
@@ -230,7 +238,7 @@ function field_error(array $errors, string $field): string
 
             <label for="thumbnail">Image de couverture (chemin)</label>
             <input type="text" id="thumbnail" name="thumbnail" value="<?= e($work['thumbnail']) ?>" placeholder="img/DJERBISM/gallery_img/djerbism2.jpg">
-            <p class="field-hint">Provisoire : l'envoi d'images depuis l'admin arrive à l'étape 8.</p>
+            <p class="field-hint">Rempli automatiquement avec le bouton « Couverture » de la section Images.</p>
             <?= field_error($errors, 'thumbnail') ?>
 
             <label class="checkbox">
@@ -240,4 +248,56 @@ function field_error(array $errors, string $field): string
 
             <button type="submit">Enregistrer</button>
         </form>
+
+        <!-- id="images" : la page images.php nous renvoie directement ici (edit.php?id=3#images) -->
+        <section id="images" class="admin-images">
+            <h2>Images</h2>
+
+            <?php if (!$id): ?>
+                <p class="field-hint">Enregistre d'abord l'œuvre : tu pourras ensuite lui ajouter des images.</p>
+            <?php else: ?>
+                <div class="image-grid">
+                    <?php foreach ($images as $image): ?>
+                        <div class="image-card">
+                            <!-- ../ : les chemins en base partent de la racine du site, et on est dans admin/ -->
+                            <img src="../<?= e($image['path']) ?>" alt="" loading="lazy">
+
+                            <?php if ($image['path'] === $work['thumbnail']): ?>
+                                <span class="badge badge-published">Couverture</span>
+                            <?php else: ?>
+                                <form method="post" action="images.php?id=<?= $id ?>">
+                                    <?= csrf_field() ?>
+                                    <input type="hidden" name="action" value="cover">
+                                    <input type="hidden" name="image_id" value="<?= (int) $image['id'] ?>">
+                                    <button type="submit" class="button-small">Couverture</button>
+                                </form>
+                            <?php endif; ?>
+
+                            <!-- onsubmit + confirm() : boîte de dialogue "Es-tu sûr ?" avant d'envoyer -->
+                            <form method="post" action="images.php?id=<?= $id ?>" onsubmit="return confirm('Supprimer cette image ?');">
+                                <?= csrf_field() ?>
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="image_id" value="<?= (int) $image['id'] ?>">
+                                <button type="submit" class="button-small button-danger">Supprimer</button>
+                            </form>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <!-- enctype="multipart/form-data" : OBLIGATOIRE pour envoyer des fichiers.
+                     Sans lui, le navigateur n'envoie que le nom du fichier, pas son contenu. -->
+                <form method="post" action="images.php?id=<?= $id ?>" enctype="multipart/form-data" class="admin-form">
+                    <?= csrf_field() ?>
+                    <input type="hidden" name="action" value="upload">
+
+                    <label for="images-input">Ajouter des images</label>
+                    <!-- name="images[]" + multiple : plusieurs fichiers d'un coup.
+                         accept : filtre la fenêtre de choix (confort seulement, pas une sécurité) -->
+                    <input type="file" id="images-input" name="images[]" multiple accept="image/jpeg,image/png,image/webp">
+                    <p class="field-hint">JPEG, PNG ou WebP, 15 Mo maximum par image. La première image de la liste s'affiche en grand sur le site.</p>
+
+                    <button type="submit">Envoyer</button>
+                </form>
+            <?php endif; ?>
+        </section>
 <?php require __DIR__ . '/../includes/admin_footer.php'; ?>
