@@ -1,0 +1,96 @@
+/* =====================================================================
+   Styles de l'administration : simples et lisibles, séparés du site public
+   ===================================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #f4f4f5;
+    color: #18181b;
+}
+
+.admin-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #18181b;
+    color: #fff;
+}
+
+.admin-logo {
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.admin-logout {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 14px;
+}
+
+.admin-main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 24px 16px;
+}
+
+/* --- Formulaires --- */
+
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #fff;
+    padding: 24px;
+    border-radius: 8px;
+}
+
+.admin-login {
+    max-width: 380px;
+    margin: 40px auto;
+}
+
+.admin-form label {
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.admin-form input,
+.admin-form textarea,
+.admin-form select {
+    padding: 10px;
+    border: 1px solid #d4d4d8;
+    border-radius: 6px;
+    font: inherit;
+}
+
+button {
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 6px;
+    background: #db2777;   /* rose, en clin d'œil au "pink-filter" du site */
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.admin-form button {
+    margin-top: 16px;
+}
+
+.admin-error {
+    padding: 10px;
+    border-radius: 6px;
+    background: #fee2e2;
+    color: #991b1b;
+}
