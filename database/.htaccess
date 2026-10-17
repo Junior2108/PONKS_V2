@@ -1,0 +1,3 @@
+# Ce dossier contient la structure de la base et des scripts en ligne de commande :
+# rien ici ne doit être accessible depuis un navigateur.
+Require all denied
