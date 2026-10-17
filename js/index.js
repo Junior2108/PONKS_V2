@@ -1,3 +1,4 @@
+// Sélectionner tous les éléments d'image miniature et l'image principale*/
 const miniatures = document.querySelectorAll(".hero_work_thumb_image img");
 const imagePrincipale = document.getElementById("MainImage");
 
@@ -7,7 +8,7 @@ miniatures.forEach(mini => {
     });
     });
 
-
+// Sélectionner tous les liens de navigation*/
 const liens = document.querySelectorAll('.nav-link');
 
 liens.forEach(lien => {
@@ -20,140 +21,174 @@ liens.forEach(lien => {
 });
 
 
-document.getElementById("btnSuivant").onclick = function() {
-    window.location.href = "page-suivante.html"; // Redirige vers la nouvelle URL
-};
+// Récupérer toutes les images de la page
+const allImages = Array.from(document.querySelectorAll('.hero_work_thumb_image img'));
+const mainImage = document.getElementById('MainImage');
+let currentIndex = allImages.indexOf(mainImage);
+
+// ─── Créer l'overlay ─────────────────────────────────────
+const overlay = document.createElement('div');
+overlay.style.cssText = `
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.88);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+`;
+document.body.appendChild(overlay);
+
+// ─── Image affichée ──────────────────────────────────────
+const lightboxImg = document.createElement('img');
+lightboxImg.style.cssText = `
+  max-width: 80vw;
+  max-height: 85vh;
+  border-radius: 8px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+  display: block;
+  transition: opacity 0.2s ease;
+`;
+overlay.appendChild(lightboxImg);
+
+// ─── Compteur ────────────────────────────────────────────
+const counter = document.createElement('div');
+counter.style.cssText = `
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 14px;
+  opacity: 0.7;
+  font-family: sans-serif;
+`;
+overlay.appendChild(counter);
+
+// ─── Bouton Fermer ───────────────────────────────────────
+const closeBtn = document.createElement('button');
+closeBtn.textContent = '✕';
+closeBtn.style.cssText = `
+  position: absolute;
+  top: 18px; right: 24px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  opacity: 0.8;
+  line-height: 1;
+`;
+overlay.appendChild(closeBtn);
+
+// ─── Flèches ─────────────────────────────────────────────
+function createArrow(direction) {
+  const btn = document.createElement('button');
+  btn.textContent = direction === 'prev' ? '❮' : '❯';
+  btn.style.cssText = `
+    position: absolute;
+    top: 50%;
+    ${direction === 'prev' ? 'left: 24px' : 'right: 24px'};
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: white;
+    font-size: 32px;
+    padding: 12px 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s;
+    line-height: 1;
+  `;
+  btn.addEventListener('mouseenter', () => btn.style.background = 'rgba(255,255,255,0.3)');
+  btn.addEventListener('mouseleave', () => btn.style.background = 'rgba(255,255,255,0.15)');
+  return btn;
+}
+
+const prevBtn = createArrow('prev');
+const nextBtn = createArrow('next');
+overlay.appendChild(prevBtn);
+overlay.appendChild(nextBtn);
+
+// ─── Logique de navigation ───────────────────────────────
+function showImage(index) {
+  // Boucle infinie
+  if (index < 0) index = allImages.length - 0;
+  if (index >= allImages.length) index = 0;
+
+  currentIndex = index;
+
+  lightboxImg.style.opacity = '0';
+  setTimeout(() => {
+    lightboxImg.src = allImages[currentIndex].src;
+    lightboxImg.alt = allImages[currentIndex].alt;
+    lightboxImg.style.opacity = '1';
+  }, 150);
+
+  counter.textContent = `${currentIndex + 1} / ${allImages.length}`;
+
+  // Masquer les flèches s'il n'y a qu'une image
+  const hasMultiple = allImages.length > 1;
+  prevBtn.style.display = hasMultiple ? 'block' : 'none';
+  nextBtn.style.display = hasMultiple ? 'block' : 'none';
+}
+
+prevBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  showImage(currentIndex - 1);
+});
+
+nextBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  showImage(currentIndex + 1);
+});
+
+// ─── Ouvrir la lightbox ──────────────────────────────────
+mainImage.style.cursor = 'pointer';
+mainImage.addEventListener('click', () => {
+  currentIndex = allImages.indexOf(mainImage);
+  showImage(currentIndex);
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+});
+
+// ─── Fermeture ───────────────────────────────────────────
+function closeLightbox() {
+  overlay.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+closeBtn.addEventListener('click', closeLightbox);
+overlay.addEventListener('click', (e) => {
+  if (e.target === overlay) closeLightbox();
+});
+
+// ─── Clavier ─────────────────────────────────────────────
+document.addEventListener('keydown', (e) => {
+  if (overlay.style.display === 'none') return;
+  if (e.key === 'Escape')      closeLightbox();
+  if (e.key === 'ArrowLeft')   showImage(currentIndex - 1);
+  if (e.key === 'ArrowRight')  showImage(currentIndex + 1);
+});
 
 
- // ─────────────────────────────────────────────
-  //  CONFIGURATION — modifiez ces valeurs
-  // ─────────────────────────────────────────────
-  const DOSSIER_PARENT = '../img/FLANEUR/gallery_img/';       // dossier des originaux
-  const DOSSIER_THUMB  = '../img/FLANEUR/gallery_img/thumbs/'; // dossier des miniatures
-
-  // Liste de vos fichiers (nom uniquement, sans chemin)
-  const photos = [
-    'montagne.jpg',
-    'mer.jpg',
-    'foret.jpg',
-    'ville.jpg',
-    'portrait.jpg',
-    'coucher-soleil.jpg',
-    'lac.jpg',
-    'desert.jpg',
-    'cascade.jpg',
-    'prairie.jpg',
-    'route.jpg',
-    'plage.jpg',
-  ];
-  // ─────────────────────────────────────────────
-
-  // ── Construction de la galerie ──
-  const gallery  = document.getElementById('gallery');
-  const lightbox = document.getElementById('lightbox');
-  const lbImg    = document.getElementById('lightbox-img');
-  const lbCap    = document.getElementById('lightbox-caption');
-  const lbCount  = document.getElementById('lb-counter');
-  let current    = 0;
-
-  function nomSansExtension(f) {
-    return f.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
-  }
-
-photos.forEach((fichier, index) => {
-    const card = document.createElement('div');
-    card.className = 'thumb-card';
-    card.dataset.index = index;
-
-    const img = document.createElement('img');
-    img.src = DOSSIER_THUMB + fichier;
-    img.alt = nomSansExtension(fichier);
-    img.loading = 'lazy';
-
-    // Fallback visuel si la miniature n'existe pas (démo)
-    img.onerror = () => {
-      img.style.display = 'none';
-      card.style.background = `hsl(${index * 29 % 360}, 18%, 22%)`;
-      const ph = document.createElement('div');
-      ph.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.6rem;opacity:.4;';
-      ph.textContent = '🖼';
-      card.appendChild(ph);
-    };
-
-    const label = document.createElement('div');
-    label.className = 'label';
-    label.textContent = nomSansExtension(fichier);
-
-    card.appendChild(img);
-    card.appendChild(label);
-    card.addEventListener('click', () => openLightbox(index));
-    gallery.appendChild(card);
-  });
-
-  // ── Lightbox ──
-  function openLightbox(index) {
-    current = index;
-    afficher();
-    lightbox.classList.add('open');
-  }
-
-  function afficher() {
-    const fichier = photos[current];
-    lbImg.src = DOSSIER_PARENT + fichier;
-    lbImg.alt = nomSansExtension(fichier);
-    lbCap.textContent = nomSansExtension(fichier);
-    lbCount.textContent = `${current + 1} / ${photos.length}`;
-  }
-
-  function fermer() { lightbox.classList.remove('open'); }
-
-  function precedent() {
-    current = (current - 1 + photos.length) % photos.length;
-    afficher();
-  }
-
-  function suivant() {
-    current = (current + 1) % photos.length;
-    afficher();
-  }
-
-  document.getElementById('lb-close').addEventListener('click', fermer);
-  document.getElementById('lb-prev').addEventListener('click', precedent);
-  document.getElementById('lb-next').addEventListener('click', suivant);
-
-  // Fermer en cliquant à l'extérieur de l'image
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) fermer();
-  });
-
-  // Navigation clavier
-  document.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('open')) return;
-    if (e.key === 'ArrowLeft')  precedent();
-    if (e.key === 'ArrowRight') suivant();
-    if (e.key === 'Escape')     fermer();
-  });
 
 
-    // const thumbnail = document.getElementById("MainImage");
-    // const overlay = document.getElementById('overlay');
-    // const overlayImg = document.getElementById('overlayImg');
-    // const closeBtn = document.getElementById('closeBtn');
 
-    // // Quand on clique sur la miniature → afficher l'image
-    // thumbnail.addEventListener('click', () => {
-    //   overlay.style.display = 'flex';
-    //   overlayImg.src = thumbnail.src; // on reprend la même image
-    // });
 
-    // // Fermer en cliquant sur X
-    // closeBtn.addEventListener('click', () => {
-    //   overlay.style.display = 'none';
-    // });
 
-    // // Fermer en cliquant en dehors de l'image
-    // overlay.addEventListener('click', (e) => {
-    //   if (e.target === overlay) {
-    //     overlay.style.display = 'none';
-    //   }
-    // });
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

@@ -61,7 +61,23 @@ h2 {
 .hero_work_text h2,
 .text_head_index h2 {
     color: #fe0138;
+    margin-bottom: 2rem;
 }
+
+.hero_work_text h2{
+    margin-bottom: 1rem;
+}
+
+
+.hero_work_info {
+    font-size: 1.4rem;
+    line-height: 1.3;
+    margin-bottom: 2rem;
+}
+
+.hero_work_info a {
+    font-size: 1.4rem;
+    }
 
 
 /* .hero_work_text h2 {
@@ -181,10 +197,23 @@ nav a:hover {
     width: 100%;
     order: 2;
 }
-
+.hero_public_art_txt h3,
 .text_head_index p,
 .hero_work_text p{
     font-size: 1.4rem;
+    line-height: 1.3;
+}
+
+.hero_public_art_txt h3 {
+	/* color: #000; */
+	/* font-weight: 300; */
+	/* font-size: 1.2rem; */
+	/* text-transform: uppercase; */
+	/* line-height: 1.4rem; */
+}
+
+.text_head_index p{
+    line-height: 1.3;
 }
 
 .text_head_index{
@@ -210,6 +239,19 @@ nav a:hover {
     height: auto;
     margin: 0 auto;
     margin-bottom: 3rem;
+}
+
+
+.hero_film_txt {
+    line-height: 1.3;
+}
+
+.p_description {
+    margin-bottom: 2rem;
+}
+
+.trailer {
+    margin-bottom: 5rem;
 }
 
 /* ===============================================================  SECTION GALLERY  ===================================================================== */
@@ -370,6 +412,10 @@ nav a:hover {
 	color: #fe0137;
     font-style: italic;
 }
+.hero_film .timelaps {
+    margin-bottom: 2rem;
+}
+
 /* ===============================================================  FOOTER   ===================================================================== */
 
 .footer {
@@ -404,20 +450,21 @@ nav a:hover {
 .hero_work_gallery {
     width: 100%;
     height: auto;
-    margin-bottom: 8rem;
+    margin-bottom: 4rem;
 }
 
 .hero_work_image {
     width: 100%;
-    height: auto;
+    height: 100%;
     aspect-ratio: 1/1;
 }
 
 .hero_work_image img {
     width: 100%;
-    height: 100%;
+    height: auto;
     aspect-ratio: 1/1;
-    object-fit: cover;
+    object-fit: contain;
+    cursor: pointer;
 }
 
 
@@ -437,10 +484,9 @@ nav a:hover {
     margin-bottom: 50px;
 }
 
-.thumbnail,
 .thumbnail_block {
     width: 100%;
-    height: 100%;
+    height: auto;
     aspect-ratio: 1/1;
 }
 
@@ -452,7 +498,10 @@ nav a:hover {
 }
 
 .hero_work_thumb_image img {
+    width: 100%;
+    height: 100%;
     cursor: pointer;
+    object-fit: cover;
 } 
 
 .cv_bio {
@@ -468,13 +517,7 @@ nav a:hover {
 /* ===============================================================   FILMS PAGE   ===================================================================== */
 
 .hero_work{
-    margin-bottom: 10%;
-}
-
-.hero_film_txt p{
-    font-size: 1.4rem;
-    font-weight: 500;
-    margin: 0;
+    margin-bottom: 20%;
 }
 
 .hero_public_art_txt h2 {
@@ -485,13 +528,13 @@ nav a:hover {
 	text-transform: uppercase;
 }
 
-.hero_public_art_txt h3 {
+/* .hero_public_art_txt h3 {
 	color: #000;
 	font-weight: 300;
 	font-size: 1.2rem;
 	text-transform: uppercase;
 	line-height: 1.4rem;
-}
+} */
 
 .hero_public_art_txt h3:last-of-type {
 	margin-bottom: 50px;
@@ -499,9 +542,8 @@ nav a:hover {
 
 .hero_public_art_txt p {
 	font-size: 1.4rem;
-	line-height: 1.1;
+	line-height: 1.3;
 	margin-bottom: 2rem;
-    text-align: justify;
 
 }
 
@@ -523,17 +565,22 @@ nav a:hover {
 }
 
 .cv_bio p {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 }
  .downlaod_link {
-    margin: 2rem 0 7rem 0;
+    margin: 4rem 0 2rem 0;
 }
 
  .downlaod_link a{
     color: #000;
     font-weight: 500;
     text-decoration: underline;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+}
+
+.p_title_description {
+    font-size: 1.4rem;
+   margin: 2rem 0 4rem 0;
 }
 
 .p_title {
@@ -548,6 +595,12 @@ nav a:hover {
 .hero_film_frame {
 	width: 100%;
     aspect-ratio: 16/9;
+}
+
+.slashes_description {
+    font-size: 1.4rem;
+    letter-spacing: 12%;
+    margin-bottom: 2rem;
 }
 
 
@@ -596,7 +649,7 @@ nav a:hover {
 .hero_windmade_rgb_txt p {
 	font-size: 1.4rem;
 	line-height: 1.1;
-	margin-bottom: 2rem;
+	margin-bottom:Current Location 2rem;
     text-align: justify;
 
 }
@@ -604,12 +657,12 @@ nav a:hover {
 
 /* ===============================================================   CV BIO  ===================================================================== */
 
-.newsletter {
-    margin: 2rem 0 7rem 0;
+.newsletter {Current Location
+    margin: 4rem 0 7rem 0;
 }
 
 .newsletter label {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: #000;
     margin-bottom: 0.5rem;
     display: block;
@@ -637,5 +690,34 @@ nav a:hover {
     font-size: 1.2rem;
 }
 
+.privacy_title {
+    margin: 4rem 0 2rem 0;
+}
+
+.privacy_title::after {
+    content: ":";
+    font-size: 1.4rem;
+}
+
+.privacy_title_list {
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.privacy_list li{
+    font-size: 1.4rem;
+    margin-left: 2rem;
+}
+
+.privacy_link {
+    color: #000;
+    font-weight: 500;
+    text-decoration: underline;
+    font-size: 1.4rem;
+}
 
 
+.currentProjectArticle{
+    margin-bottom: 2rem;
+}
