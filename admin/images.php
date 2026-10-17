@@ -4,6 +4,7 @@
 //   images.php?id=3   + POST action=upload  -> ajouter des images
 //                     + POST action=cover   -> choisir l'image de couverture
 //                     + POST action=delete  -> supprimer une image
+//                     + POST action=move    -> déplacer une image (direction=up|down)
 // =====================================================================
 
 require __DIR__ . '/../includes/db.php';
@@ -179,6 +180,47 @@ if ($action === 'cover' || $action === 'delete') {
         }
 
         flash('Image supprimée.');
+    }
+}
+
+// ---------------------------------------------------------------------
+// 5. Déplacer une image d'un cran vers le haut ou le bas
+// ---------------------------------------------------------------------
+if ($action === 'move') {
+    $imageId   = (int) ($_POST['image_id'] ?? 0);
+    $direction = ($_POST['direction'] ?? '') === 'up' ? -1 : 1;
+
+    // Les ids des images de l'œuvre, dans l'ordre actuel : [12, 15, 13, ...]
+    $stmt = db()->prepare('SELECT id FROM work_images WHERE work_id = ? ORDER BY position, id');
+    $stmt->execute([$id]);
+    $ids = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    // array_search : à quel index du tableau se trouve l'image ? (false si absente)
+    $from = array_search($imageId, $ids);
+    $to   = $from === false ? false : $from + $direction;
+
+    if ($from !== false && isset($ids[$to])) {
+        // On échange les deux images dans le tableau...
+        [$ids[$from], $ids[$to]] = [$ids[$to], $ids[$from]];
+
+        // ...puis on réécrit la position de TOUTES les images : 0, 1, 2, 3...
+        // (au passage, cela répare les trous laissés par les suppressions)
+        //
+        // TRANSACTION : ces UPDATE forment un tout. Si l'un d'eux échoue au
+        // milieu, rollBack() annule ceux déjà faits : on ne se retrouve jamais
+        // avec un ordre à moitié modifié.
+        $update = db()->prepare('UPDATE work_images SET position = ? WHERE id = ?');
+
+        db()->beginTransaction();
+        try {
+            foreach ($ids as $position => $imgId) {
+                $update->execute([$position, $imgId]);
+            }
+            db()->commit();      // tout s'est bien passé : on valide l'ensemble
+        } catch (Throwable $e) {
+            db()->rollBack();    // une erreur : on annule tout
+            throw $e;            // et on laisse l'erreur s'afficher / s'enregistrer
+        }
     }
 }
 

@@ -57,9 +57,8 @@ CREATE TABLE IF NOT EXISTS works (
 
     title         VARCHAR(200) NOT NULL,
 
-    -- Rubrique du menu dans laquelle l'œuvre apparaît.
-    -- ENUM : MySQL refuse toute autre valeur que celles de la liste.
-    category      ENUM('works', 'public_art', 'films') NOT NULL DEFAULT 'works',
+    -- Sous-titre affiché à côté du titre, ex : "(self-portrait of Ponks)"
+    subtitle      VARCHAR(200),
 
     -- Colonne séparée (et pas seulement dans "info") pour pouvoir TRIER par année
     year          SMALLINT UNSIGNED,
@@ -73,6 +72,19 @@ CREATE TABLE IF NOT EXISTS works (
 
     -- Le texte long / poème. Les retours à la ligne seront convertis en <br>.
     description   TEXT,
+
+    -- Lien YouTube de la vidéo de l'œuvre (films)
+    video_url     VARCHAR(255),
+
+    -- Dans quelles rubriques l'œuvre apparaît-elle ? (0 = non, 1 = oui)
+    -- Toutes les œuvres publiées apparaissent dans "works" ; une même œuvre
+    -- peut être à la fois dans public art ET dans films.
+    in_public_art TINYINT(1) NOT NULL DEFAULT 0,
+    in_films      TINYINT(1) NOT NULL DEFAULT 0,
+
+    -- Page d'accueil : dans la galerie / en grand tout en haut (une seule)
+    on_home       TINYINT(1) NOT NULL DEFAULT 0,
+    home_hero     TINYINT(1) NOT NULL DEFAULT 0,
 
     -- Image affichée dans les galeries (works.html et bas des pages)
     thumbnail     VARCHAR(255),
@@ -88,8 +100,8 @@ CREATE TABLE IF NOT EXISTS works (
     updated_at    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     -- INDEX : accélère la requête la plus fréquente du site,
-    -- "toutes les œuvres de telle rubrique, dans l'ordre"
-    INDEX idx_works_category (category, position)
+    -- "toutes les œuvres publiées, dans l'ordre"
+    INDEX idx_works_published (published, position)
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
