@@ -1,0 +1,27 @@
+# =====================================================================
+# Adresses du site
+#
+# Les visiteurs (et Google, Instagram...) continuent d'utiliser les adresses
+# historiques en .html. Apache les "réécrit" EN INTERNE vers les pages PHP :
+# le navigateur ne voit aucune différence, l'adresse ne change pas.
+#   flaneur.html  -> oeuvre.php?slug=flaneur
+# =====================================================================
+
+# Page servie quand on demande juste le dossier ( / )
+DirectoryIndex index.php
+
+RewriteEngine On
+
+# Pages fixes
+# [L] = "Last" : si la règle s'applique, on arrête de lire les suivantes
+# [QSA] = garde les paramètres éventuels de l'adresse (?xxx=...)
+RewriteRule ^index\.html$                       index.php                         [L,QSA]
+RewriteRule ^works\.html$                       works.php                         [L,QSA]
+RewriteRule ^public_art\.html$                  works.php?category=public_art     [L]
+RewriteRule ^films\.html$                       films.php                         [L,QSA]
+RewriteRule ^(news|cv_bio|privacy_policy)\.html$ page.php?slug=$1                 [L]
+
+# Toute autre adresse "quelque_chose.html" QUI N'EXISTE PAS en tant que fichier
+# (-f = "est un fichier") est considérée comme une œuvre.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-z0-9_-]+)\.html$               oeuvre.php?slug=$1                [L]
