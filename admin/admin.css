@@ -94,3 +94,106 @@ button {
     background: #fee2e2;
     color: #991b1b;
 }
+
+/* --- Liens qui ressemblent à des boutons --- */
+
+.button {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 6px;
+    background: #db2777;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* --- Liste des œuvres --- */
+
+.admin-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-toolbar h1 small {
+    font-weight: 400;
+    color: #71717a;
+}
+
+.admin-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+}
+
+.admin-filters a {
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #fff;
+    color: #18181b;
+    text-decoration: none;
+}
+
+.admin-filters a.active {
+    background: #18181b;
+    color: #fff;
+}
+
+.admin-table-wrap {
+    overflow-x: auto;   /* défilement horizontal si l'écran est trop étroit */
+    background: #fff;
+    border-radius: 8px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px;
+    border-bottom: 1px solid #e4e4e7;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.admin-table th {
+    font-size: 13px;
+    color: #71717a;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.admin-actions a {
+    color: #db2777;
+}
+
+.badge {
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 13px;
+}
+
+.badge-published {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge-draft {
+    background: #e4e4e7;
+    color: #3f3f46;
+}
+
+.admin-empty {
+    padding: 24px;
+    background: #fff;
+    border-radius: 8px;
+    color: #71717a;
+}
