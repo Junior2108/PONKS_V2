@@ -1,0 +1,5 @@
+# Ce dossier contient la configuration et le code partagé :
+# il ne doit JAMAIS être accessible depuis un navigateur.
+# Les pages PHP du site peuvent toujours l'inclure (require), car cela
+# se passe sur le serveur, sans passer par Apache.
+Require all denied
