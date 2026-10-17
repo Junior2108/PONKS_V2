@@ -12,15 +12,15 @@ nav {
 
 .hero_work_gallery {
 	width: 65%;
-	height: 65%;
 	/* justify-content: center;
 	margin-bottom: 0; */
 }
 
 .hero_work_text {
-	width: 33%;
+	width: 32%;
 	padding: 0;
 }
+
 
 .hero_film {
 	display: flex;
@@ -32,6 +32,11 @@ nav {
 .hero_film_txt {
 	width: 50%;
 	margin: 0 0 0 4rem;
+}
+
+.footer {
+    width: 98%;
+    margin: 0 1%;
 }
 
 }
