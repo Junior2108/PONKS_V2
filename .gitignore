@@ -1,0 +1,5 @@
+# Secrets : mot de passe de la base
+includes/config.php
+
+# Fichiers système créés par Windows sur une clé USB
+System Volume Information/
