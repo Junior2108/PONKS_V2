@@ -84,13 +84,15 @@ function csrf_check(): void
 // "Œuvre enregistrée" doit donc survivre à la redirection. On le range
 // en session, et on l'efface dès qu'il a été lu.
 
-function flash(string $message): void
+// $type : 'success' (vert) ou 'error' (rouge)
+function flash(string $message, string $type = 'success'): void
 {
     start_session();
-    $_SESSION['flash'] = $message;
+    $_SESSION['flash'] = ['message' => $message, 'type' => $type];
 }
 
-function take_flash(): ?string
+// Renvoie ['message' => ..., 'type' => ...] ou null s'il n'y a rien
+function take_flash(): ?array
 {
     start_session();
     $message = $_SESSION['flash'] ?? null;

@@ -237,3 +237,43 @@ button {
     align-items: center;
     font-weight: 400;
 }
+
+/* --- Images d'une œuvre --- */
+
+.admin-images {
+    margin-top: 32px;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.image-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+    padding: 8px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.image-card img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;   /* recadre l'image en carré sans la déformer */
+    border-radius: 4px;
+}
+
+.button-small {
+    padding: 4px 10px;
+    font-size: 13px;
+    background: #52525b;
+}
+
+.button-danger {
+    background: #b91c1c;
+}

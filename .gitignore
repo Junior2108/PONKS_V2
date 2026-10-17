@@ -3,3 +3,8 @@ includes/config.php
 
 # Fichiers système créés par Windows sur une clé USB
 System Volume Information/
+
+# Images envoyées depuis l'admin : ce sont des DONNÉES (comme la base),
+# pas du code. On garde seulement le dossier vide (.gitkeep) dans Git.
+uploads/works/*
+!uploads/works/.gitkeep
