@@ -10,8 +10,10 @@ $videoId = youtube_id($videoWork['video_url']);
 ?>
 <?php if ($videoId): ?>
     <div class="hero_film_frame">
-        <!-- youtube-nocookie.com : la même vidéo, mais YouTube ne dépose pas
-             de cookie de suivi tant que le visiteur ne lance pas la lecture -->
+        <?php
+        // youtube-nocookie.com : la même vidéo, mais YouTube ne dépose pas
+        // de cookie de suivi tant que le visiteur ne lance pas la lecture
+        ?>
         <iframe
             width="1024"
             height="576"

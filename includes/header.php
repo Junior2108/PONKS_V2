@@ -43,7 +43,7 @@ $menu = [
         <div class="container">
             <header class="header">
                 <div class="logo">
-                    <a href="index.html">
+                    <a href="./">
                         <img src="img/logo.png" alt="PONKS">
                     </a>
                 </div>

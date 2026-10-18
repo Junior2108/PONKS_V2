@@ -12,10 +12,21 @@ DirectoryIndex index.php
 
 RewriteEngine On
 
+# L'accueil a UNE seule adresse : la racine du site ( / ).
+# index.html ou index.php tapés dans la barre d'adresse -> redirection 301 vers /
+# (301 = "déplacé définitivement" : Google retient la bonne adresse).
+#   THE_REQUEST = la demande ORIGINALE du navigateur. On vérifie que c'est bien
+#   le visiteur qui a tapé "index", et pas Apache qui sert index.php en interne
+#   pour la racine (sinon : redirection infinie).
+#   %1 = le dossier capturé par la dernière RewriteCond (fonctionne en local
+#   dans /PONKS_ADMIN/PONKS_V2/ comme en ligne à la racine du domaine).
+RewriteCond %{THE_REQUEST} \s[^?\s]*/index\.(html|php)[?\s]
+RewriteCond %{REQUEST_URI} ^(.*/)index\.(html|php)$
+RewriteRule ^index\.(html|php)$                 %1                                [R=301,L]
+
 # Pages fixes
 # [L] = "Last" : si la règle s'applique, on arrête de lire les suivantes
 # [QSA] = garde les paramètres éventuels de l'adresse (?xxx=...)
-RewriteRule ^index\.html$                       index.php                         [L,QSA]
 RewriteRule ^works\.html$                       works.php                         [L,QSA]
 RewriteRule ^public_art\.html$                  works.php?category=public_art     [L]
 RewriteRule ^films\.html$                       films.php                         [L,QSA]

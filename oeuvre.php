@@ -89,7 +89,7 @@ require __DIR__ . '/includes/header.php';
                     </h2>
                     <div class="hero_work_info">
                         <?php foreach (info_lines($work['info']) as $line): ?>
-                            <!-- linkify : une adresse https://... dans les infos devient un lien -->
+                            <?php // linkify : une adresse https://... dans les infos devient un lien ?>
                             <p><?= linkify(e($line)) ?></p>
                         <?php endforeach; ?>
                     </div>
@@ -100,8 +100,12 @@ require __DIR__ . '/includes/header.php';
                                 ///////////////////////////////////////////////////////////////////////////
                             </p>
                         <?php endif; ?>
-                        <!-- text_to_html : une ligne vide = un nouveau paragraphe,
-                             et le texte est échappé AVANT d'ajouter les balises -->
+                        <?php
+                        // text_to_html : une ligne vide = un nouveau paragraphe,
+                        // et le texte est échappé AVANT d'ajouter les balises.
+                        // (Commentaires PHP et non <!-- HTML --> sur les pages publiques :
+                        //  un commentaire HTML est envoyé à chaque visiteur.)
+                        ?>
                         <?= text_to_html($work['description']) ?>
                     </div>
                     <?php if ($work['video_url']): ?>
