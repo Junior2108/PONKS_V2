@@ -6,7 +6,7 @@
             <footer class="footer">
                 <div class="footer-logo">
                     <p>
-                        <a href="index.html">
+                        <a href="./">
                             <img src="img/logo.png" alt="Logo">
                         </a>
                     </p>

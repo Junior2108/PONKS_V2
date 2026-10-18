@@ -26,7 +26,7 @@ $pageTitle = $pageTitle ?? 'Administration';
             <nav class="admin-nav">
                 <a href="index.php">Œuvres</a>
                 <a href="pages.php">Pages</a>
-                <a href="../index.html" target="_blank">Voir le site</a>
+                <a href="../" target="_blank">Voir le site</a>
             </nav>
             <!-- La déconnexion est un formulaire POST (et pas un simple lien) :
                  un site pirate ne peut donc pas te déconnecter avec une image <img src="logout.php"> -->
