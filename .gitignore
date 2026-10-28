@@ -8,3 +8,8 @@ System Volume Information/
 # pas du code. On garde seulement le dossier vide (.gitkeep) dans Git.
 uploads/works/*
 !uploads/works/.gitkeep
+# Identifiants FTP : ne jamais les mettre dans Git
+ftp.txt
+
+# Dépendances React (réinstallées avec "npm install" dans front/)
+front/node_modules/

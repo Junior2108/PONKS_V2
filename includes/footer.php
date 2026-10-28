@@ -32,5 +32,7 @@
             </footer>
         </div>
         <script src="js/index.js"></script>
+        <?php // Composants React (sources dans front/, compilés avec "npm run build") ?>
+        <script type="module" src="js/react/islands.js"></script>
     </body>
 </html>
