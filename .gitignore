@@ -1,5 +1,6 @@
 # Secrets : mot de passe de la base
 includes/config.php
+includes/config.production.php
 
 # Fichiers système créés par Windows sur une clé USB
 System Volume Information/
