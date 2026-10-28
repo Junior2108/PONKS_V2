@@ -12,6 +12,16 @@ DirectoryIndex index.php
 
 RewriteEngine On
 
+# Fichiers qui ne doivent JAMAIS être servis, même envoyés par erreur sur le serveur :
+# exports de la base, identifiants FTP, notes, fichiers de Node.js...
+<FilesMatch "(?i)(\.(sql|gz|md|log|bundle)|^ftp\.txt|^index\.txt|^package(-lock)?\.json)$">
+    Require all denied
+</FilesMatch>
+
+# Fichiers et dossiers cachés (.git, .vscode, .htaccess...) -> 403 "interdit".
+# Exception : .well-known/, utilisé par l'hébergeur pour le certificat HTTPS.
+RewriteRule (^|/)\.(?!well-known/) - [F,L]
+
 # En ligne : une seule adresse, https://ponks.org (sans www, toujours en HTTPS).
 # http://... ou www.ponks.org -> redirection 301 vers https://ponks.org/...
 # Ne concerne que ponks.org : le site en local (localhost) n'est pas touché.
