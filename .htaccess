@@ -12,6 +12,14 @@ DirectoryIndex index.php
 
 RewriteEngine On
 
+# En ligne : une seule adresse, https://ponks.org (sans www, toujours en HTTPS).
+# http://... ou www.ponks.org -> redirection 301 vers https://ponks.org/...
+# Ne concerne que ponks.org : le site en local (localhost) n'est pas touché.
+RewriteCond %{HTTP_HOST} ^(www\.)?ponks\.org$ [NC]
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://ponks.org%{REQUEST_URI} [R=301,L]
+
 # L'accueil a UNE seule adresse : la racine du site ( / ).
 # index.html ou index.php tapés dans la barre d'adresse -> redirection 301 vers /
 # (301 = "déplacé définitivement" : Google retient la bonne adresse).

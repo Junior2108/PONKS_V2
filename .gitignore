@@ -13,3 +13,7 @@ ftp.txt
 
 # Dépendances React (réinstallées avec "npm install" dans front/)
 front/node_modules/
+
+# Exports de la base (contiennent le compte admin) : jamais dans Git
+*.sql.gz
+ponks.sql
