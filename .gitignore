@@ -8,3 +8,6 @@ System Volume Information/
 # pas du code. On garde seulement le dossier vide (.gitkeep) dans Git.
 uploads/works/*
 !uploads/works/.gitkeep
+
+# Identifiants FTP / hébergeur : ne jamais les mettre dans Git
+ftp.txt
