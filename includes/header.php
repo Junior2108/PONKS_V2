@@ -37,6 +37,7 @@ $menu = [
         <link rel="stylesheet" href="css/style1600.css">
         <link rel="stylesheet" href="css/style1920.css">
         <link rel="stylesheet" href="css/style4k.css">
+        <link rel="stylesheet" href="js/react/islands.css">
         <title><?= e($pageTitle) ?></title>
     </head>
     <body>

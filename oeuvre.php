@@ -48,6 +48,14 @@ $images = $stmt->fetchAll();
 // Grande image : la première de la galerie, sinon la miniature de l'œuvre
 $mainImage = $images[0]['path'] ?? $work['thumbnail'];
 
+// Mêmes images pour le composant React WorkGallery (grande image + lightbox)
+$galleryProps = [
+    'title'  => $work['title'],
+    'images' => $images
+        ? array_map(fn($image) => ['src' => $image['path'], 'alt' => $image['caption']], $images)
+        : [['src' => $mainImage, 'alt' => '']],
+];
+
 // ---------------------------------------------------------------------
 // 5. Affichage
 // ---------------------------------------------------------------------
@@ -56,7 +64,11 @@ $activePage = 'works';
 require __DIR__ . '/includes/header.php';
 ?>
             <div class="hero_work">
-                <div class="hero_work_gallery">
+                <?php
+                // data-react : React remplace ce bloc par le composant WorkGallery.
+                // Le HTML ci-dessous reste affiché pour Google et sans JavaScript.
+                ?>
+                <div class="hero_work_gallery" data-react="WorkGallery" data-props="<?= e(json_encode($galleryProps, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)) ?>">
                     <div class="hero_work_image">
                         <img
                             height="768"

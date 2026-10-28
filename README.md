@@ -1,49 +1,39 @@
 # PONKS_V2
 
-Site statique simple pour le portfolio PONKS.
-
-## Prérequis
-- Node.js (>= 16)
-- npm
-
-## Scripts utiles
-- `npm start` — Lance un serveur de développement (live-server) sur le port 3000 et ouvre `index.html`.
-- `npm run build` — Copie les fichiers dans `dist` (dossier prêt pour déploiement).
-- `npm run deploy:gh-pages` — Déploie le contenu du dossier `dist` sur la branche `gh-pages` (utilise la librairie `gh-pages`).
-
-## Déploiement
-1. Installer les dépendances :
-
-```bash
-npm install
-```
-
-2. Lancer localement :
-
-```bash
-npm start
-```
-
-3. Générer la build :
-
-```bash
-npm run build
-```
-
-4. Déployer sur GitHub Pages :
-
-```bash
-npm run deploy:gh-pages
-```
-
-Alternatives: vous pouvez aussi déployer le dossier `dist` sur Netlify, Vercel ou un autre hébergeur de fichiers statiques.
+Site portfolio de PONKS : pages publiques et interface d'administration en PHP / MariaDB,
+avec quelques composants interactifs en React.
 
 ## Structure du projet
-- `index.html`, `works.html`, `public_art.html`, `cv_bio.html`, `template_carousel.html` — pages HTML
-- `css/` — styles
-- `js/` — scripts
-- `img/` — images
+- `index.php`, `works.php`, `oeuvre.php`, `films.php`, `page.php` — pages publiques
+  (les anciennes adresses en `.html` sont conservées grâce au `.htaccess`)
+- `admin/` — interface d'administration (œuvres, images, pages)
+- `includes/` — configuration, connexion à la base, gabarits communs (inaccessible depuis le navigateur)
+- `database/` — schéma SQL et scripts d'import
+- `css/`, `img/` — styles et images
+- `js/index.js` — petit script commun
+- `front/` — sources des composants React (inaccessible depuis le navigateur)
+- `js/react/` — composants React compilés, chargés par les pages PHP
 
-## Notes
-- Le site est statique; aucun backend n'est inclus.
-- Si vous avez besoin d'intégration CI/CD, je peux ajouter un fichier GitHub Actions de build et déploiement automatisé sur demande.
+## Installation locale
+1. Copier `includes/config.example.php` en `includes/config.php` et y mettre les accès à la base.
+2. Créer la base avec `database/schema.sql`, puis appliquer les migrations.
+
+## Composants React
+PHP génère toute la page. Les zones interactives sont marquées dans le HTML :
+
+```html
+<div data-react="WorkGallery" data-props='{"images": [...]}'> ... </div>
+```
+
+`front/src/main.jsx` remplace ces zones par le composant React du même nom.
+
+```bash
+cd front
+npm install     # une seule fois
+npm run dev     # recompile à chaque modification
+npm run build   # avant la mise en ligne
+```
+
+## Mise en ligne (FTP)
+Envoyer tout le site **sauf** `front/`, `includes/config.php` (déjà présent en ligne) et `ftp.txt`.
+Ne pas oublier `js/react/` après un `npm run build`.
