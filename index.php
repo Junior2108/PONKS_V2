@@ -47,7 +47,7 @@ require __DIR__ . '/includes/gallery.php';
                     <div class="title_allworks">
                         <a href="works.html">
                             ALL WORKS
-                            <svg
+                            <span class="fleche_svg"><svg
                                 viewBox="0 0 24 24"
                                 stroke-width="1.5"
                                 fill="none"
@@ -68,7 +68,7 @@ require __DIR__ . '/includes/gallery.php';
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
                                 ></path>
-                            </svg>
+                            </svg></span>
                         </a>
                     </div>
                 </div>

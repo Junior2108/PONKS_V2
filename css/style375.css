@@ -377,13 +377,20 @@ nav a:hover {
     font-size: 1.4rem;
     font-weight: 500;
 }
+.title_allworks {
+    font-size: 18px;
+}
+
+.fleche_svg{
+    height: 30px;
+    width: 30px;
+}
    
 .title_allworks a{
     display: flex;
     justify-content: center;
     align-items: center;
     color: #fe0137;
-    font-size: 1.4rem;
     font-weight: 600;
     width: 120px;
     height: 2.8rem;
