@@ -1,0 +1,42 @@
+@media screen and (min-width: 1200px) {
+
+nav {
+	margin-bottom: 5rem;
+}
+
+ .hero_work {
+    display: flex;
+	 justify-content: space-between;
+} 
+
+
+.hero_work_gallery {
+	width: 65%;
+	/* justify-content: center;
+	margin-bottom: 0; */
+}
+
+.hero_work_text {
+	width: 32%;
+	padding: 0;
+}
+
+
+.hero_film {
+	display: flex;
+	margin: 0 5%;
+	width: 90%;
+	justify-content: space-between;
+}
+
+.hero_film_txt {
+	width: 50%;
+	margin: 0 0 0 4rem;
+}
+
+.footer {
+    width: 98%;
+    margin: 0 1%;
+}
+
+}

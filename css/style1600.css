@@ -1,0 +1,20 @@
+@media screen and (min-width: 1600px) {
+
+
+.logo img {
+	margin: -9% 0 0 0%;
+}
+
+.home_page_head {
+	margin-bottom: 10rem;
+}
+nav li a {
+	font-size: 1.3rem;
+}
+
+.cv_bio p {
+	font-size: 1.4rem;
+}
+
+
+}

@@ -1,0 +1,56 @@
+# =====================================================================
+# Adresses du site
+#
+# Les visiteurs (et Google, Instagram...) continuent d'utiliser les adresses
+# historiques en .html. Apache les "réécrit" EN INTERNE vers les pages PHP :
+# le navigateur ne voit aucune différence, l'adresse ne change pas.
+#   flaneur.html  -> oeuvre.php?slug=flaneur
+# =====================================================================
+
+# Page servie quand on demande juste le dossier ( / )
+DirectoryIndex index.php
+
+RewriteEngine On
+
+# Fichiers qui ne doivent JAMAIS être servis, même envoyés par erreur sur le serveur :
+# exports de la base, identifiants FTP, notes, fichiers de Node.js...
+<FilesMatch "(?i)(\.(sql|gz|md|log|bundle)|^ftp\.txt|^index\.txt|^package(-lock)?\.json)$">
+    Require all denied
+</FilesMatch>
+
+# Fichiers et dossiers cachés (.git, .vscode, .htaccess...) -> 403 "interdit".
+# Exception : .well-known/, utilisé par l'hébergeur pour le certificat HTTPS.
+RewriteRule (^|/)\.(?!well-known/) - [F,L]
+
+# En ligne : une seule adresse, https://ponks.org (sans www, toujours en HTTPS).
+# http://... ou www.ponks.org -> redirection 301 vers https://ponks.org/...
+# Ne concerne que ponks.org : le site en local (localhost) n'est pas touché.
+RewriteCond %{HTTP_HOST} ^(www\.)?ponks\.org$ [NC]
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://ponks.org%{REQUEST_URI} [R=301,L]
+
+# L'accueil a UNE seule adresse : la racine du site ( / ).
+# index.html ou index.php tapés dans la barre d'adresse -> redirection 301 vers /
+# (301 = "déplacé définitivement" : Google retient la bonne adresse).
+#   THE_REQUEST = la demande ORIGINALE du navigateur. On vérifie que c'est bien
+#   le visiteur qui a tapé "index", et pas Apache qui sert index.php en interne
+#   pour la racine (sinon : redirection infinie).
+#   %1 = le dossier capturé par la dernière RewriteCond (fonctionne en local
+#   dans /PONKS_ADMIN/PONKS_V2/ comme en ligne à la racine du domaine).
+RewriteCond %{THE_REQUEST} \s[^?\s]*/index\.(html|php)[?\s]
+RewriteCond %{REQUEST_URI} ^(.*/)index\.(html|php)$
+RewriteRule ^index\.(html|php)$                 %1                                [R=301,L]
+
+# Pages fixes
+# [L] = "Last" : si la règle s'applique, on arrête de lire les suivantes
+# [QSA] = garde les paramètres éventuels de l'adresse (?xxx=...)
+RewriteRule ^works\.html$                       works.php                         [L,QSA]
+RewriteRule ^public_art\.html$                  works.php?category=public_art     [L]
+RewriteRule ^films\.html$                       films.php                         [L,QSA]
+RewriteRule ^(news|cv_bio|privacy_policy)\.html$ page.php?slug=$1                 [L]
+
+# Toute autre adresse "quelque_chose.html" QUI N'EXISTE PAS en tant que fichier
+# (-f = "est un fichier") est considérée comme une œuvre.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-z0-9_-]+)\.html$               oeuvre.php?slug=$1                [L]

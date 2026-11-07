@@ -1,32 +1,14 @@
-const miniatures = document.querySelectorAll(".hero_work_thumb_image img");
-const imagePrincipale = document.getElementById("MainImage");
+// Sélectionner tous les liens de navigation*/
+const liens = document.querySelectorAll('.nav-link');
 
-miniatures.forEach(mini => {
-  mini.addEventListener("click", () => {
-  imagePrincipale.src = mini.src.replace("100", "500"); 
+liens.forEach(lien => {
+    lien.addEventListener('click', function(e) {
+        // Supprimer la classe 'active' de tous les liens
+        document.querySelector('.nav-link.active')?.classList.remove('active');
+        // Ajouter la classe 'active' au lien cliqué
+        this.classList.add('active');
     });
-    });
+});
 
-
-const thumbnail = document.querySelector('.thumbnail');
-    const overlay = document.getElementById('overlay');
-    const overlayImg = document.getElementById('overlayImg');
-    const closeBtn = document.getElementById('closeBtn');
-
-    // Quand on clique sur la miniature → afficher l'image
-    thumbnail.addEventListener('click', () => {
-      overlay.style.display = 'flex';
-      overlayImg.src = thumbnail.src; // on reprend la même image
-    });
-
-    // Fermer en cliquant sur X
-    closeBtn.addEventListener('click', () => {
-      overlay.style.display = 'none';
-    });
-
-    // Fermer en cliquant en dehors de l'image
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        overlay.style.display = 'none';
-      }
-    });
+// La galerie et la lightbox de la page œuvre sont maintenant en React :
+// voir front/src/islands/WorkGallery.jsx

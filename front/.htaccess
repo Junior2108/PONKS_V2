@@ -1,0 +1,3 @@
+# Sources React et node_modules : jamais accessibles depuis un navigateur.
+# Seul le résultat compilé (js/react/) est servi au public.
+Require all denied

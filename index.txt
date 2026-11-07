@@ -1,0 +1,5 @@
+- Ajouter la dernière oeuvres de Ponks 'we still have time' / OK
+- Configuger Newsletter
+- Trouver le FTP sur GoDaddy
+- Convertir le site en REACT
+- Configuger l'affichage des thumbs pour le seo et aussi pour qu'elle affiche l'overlay de la miniature 

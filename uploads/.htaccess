@@ -1,0 +1,14 @@
+# Dossier des images envoyées depuis l'admin.
+#
+# Défense en profondeur : même si un pirate réussissait à y déposer un
+# fichier "virus.php", Apache refuserait de le servir (donc de l'exécuter).
+# Seules les images sont accessibles.
+#
+# Ce fichier est dans uploads/ et PAS dans uploads/works/ : Apache peut écrire
+# dans works/, mais pas ici. Il ne peut donc pas modifier ces règles.
+
+Require all denied
+
+<FilesMatch "(?i)\.(jpe?g|png|webp)$">
+    Require all granted
+</FilesMatch>

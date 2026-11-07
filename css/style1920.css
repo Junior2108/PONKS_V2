@@ -1,0 +1,34 @@
+@media screen and (min-width: 1920px) {
+
+nav li a {
+	font-size: 1.4rem;
+}
+
+.text_head_index h2 {
+	font-size: 1.6rem;
+}
+
+.text_head_index p {
+	font-size: 1.4rem;
+}
+
+.hero_work {
+	width: 60%;
+	margin: 0 20% 4rem 20%;
+}
+
+/* .hero_film_txt p {
+	font-size: 1.8em;
+	font-weight: 500;
+}
+
+.hero_film_txt h2 {
+	font-size: 3.5rem;
+	font-weight: 600;
+	line-height: 0.8;
+} */
+
+
+
+
+}

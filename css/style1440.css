@@ -1,0 +1,16 @@
+@media screen and (min-width: 1440px) {
+
+
+nav li a {
+	font-size: 1.2rem;
+}
+
+.text_head_index p{
+	font-size: 1.2rem;
+}
+
+.text_head_index h2 {
+    font-size: 1.4rem;
+}
+
+}

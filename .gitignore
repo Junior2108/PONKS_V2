@@ -1,0 +1,20 @@
+# Secrets : mot de passe de la base
+includes/config.php
+includes/config.production.php
+
+# Fichiers système créés par Windows sur une clé USB
+System Volume Information/
+
+# Images envoyées depuis l'admin : ce sont des DONNÉES (comme la base),
+# pas du code. On garde seulement le dossier vide (.gitkeep) dans Git.
+uploads/works/*
+!uploads/works/.gitkeep
+# Identifiants FTP : ne jamais les mettre dans Git
+ftp.txt
+
+# Dépendances React (réinstallées avec "npm install" dans front/)
+front/node_modules/
+
+# Exports de la base (contiennent le compte admin) : jamais dans Git
+*.sql.gz
+ponks.sql

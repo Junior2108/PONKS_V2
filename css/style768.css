@@ -1,0 +1,102 @@
+@media screen and (min-width: 768px) {
+
+
+/* ===============================================================  SECTION GALLERY   ===================================================================== */
+
+/* nav {
+	display: inline-block;
+	height: auto;
+	width: auto;
+	margin: 3rem 0 3.5rem 10%;
+} */
+
+.selected_works{
+display: none;
+}
+
+.gallery {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(auto-fit, 48%);
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+
+
+
+.gallery_img {
+    transition: opacity 0.3 ease;
+}
+
+/* ===============================================================  SECTION FILM HOME PAGE   ===================================================================== */
+
+.hero_film_title {
+    justify-content: right;
+    padding-right: 1rem;
+}
+
+.hero_film_txt h2:last-of-type{
+    margin-bottom: 1rem;
+}
+/* ===============================================================  SECTION FOOTER  ===================================================================== */
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 1rem; */
+}
+
+.footer-info {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 0 0 0 0;
+}   
+
+.footer-info p,
+.footer-info a {
+    font-size: 1.2rem;
+}
+
+
+.newsletter label {
+    display: inline-block;
+    margin-right: 4rem;
+}
+
+/* ===============================================================  TEMPLATE CAROUSEL  ===================================================================== */
+
+
+
+
+.hero_public_art {
+	width: 80%;
+	margin: 0 10%;
+}
+
+.hero_windmade_rgb {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin: 0 10% 5rem;
+}
+
+.hero_film_windmade_rgb {
+    width: 100%;
+    margin: 0;
+}
+
+.hero_public_art_txt {
+width: 80%;
+	margin: 4rem 10%;
+}
+
+.hero_windmade_rgb_txt {
+    width: 100%;
+    margin: 0 0 0 4rem;
+}
+      
+}
+
+
