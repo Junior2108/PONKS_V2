@@ -369,3 +369,30 @@ width: 100px;
     text-decoration: none;
     color: #000;
 }
+
+@media (max-width: 2560px) and (min-width: 1440px) {
+  
+  #image_head_index{
+    margin: 20px 465px 0 0;
+  }
+  
+  
+    #gallery {
+    grid-template-columns: repeat(auto-fit, 350px);
+    gap: 70px;
+  }
+
+  /* .gallery_block{
+    width: 525px;
+    height: 525px;
+    margin-bottom: 100px;
+} */
+
+}
+
+
+
+
+
+
+
